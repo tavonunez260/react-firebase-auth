@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": "src",
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,6 +22,11 @@
     "jsx": "react-jsx"
   },
   "include": [
+    "global.d.ts",
     "src"
+  ],
+  "plugins": [
+    { "name": "typescript-tslint-plugin" },
+    { "name": "typescript-plugin-css-modules" }
   ]
 }

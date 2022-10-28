@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Loader, MainNav, PopUpModal } from 'components'
+import { LoginPage, ProfilePage, SignUpPage } from 'pages'
+import { RootState, uiSlice } from 'store'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import { SettingsPage } from './pages/SettingsScreen'
 
-function App() {
+export const App = (): JSX.Element => {
+  const { isLoading, modal } = useSelector((state: RootState) => state.ui)
+  const { auth } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {isLoading && <Loader />}
+      <PopUpModal
+        open={modal.open}
+        handleClose={() =>
+          dispatch(
+            uiSlice.actions.showModal({ open: false, title: null, description: null, error: null })
+          )
+        }
+      />
+      <MainNav />
+      <div className="w-full h-[calc(100vh-_10rem)] flex justify-center items-center">
+        <Routes>
+          <Route
+            path="/*"
+            element={
+              !auth ? (
+                <Routes>
+                  <Route path="/register" element={<SignUpPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/*" element={<Navigate to="/login" replace />} />
+                </Routes>
+              ) : (
+                <Routes>
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
+                  <Route path="/*" element={<Navigate to="/profile" replace />} />
+                </Routes>
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </>
+  )
 }
-
-export default App;
