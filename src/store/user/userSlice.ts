@@ -6,7 +6,8 @@ const initialState: UserState = {
   lastName: undefined,
   position: undefined,
   avatar: undefined,
-  skills: undefined
+  skills: undefined,
+  email: undefined
 }
 
 export const userSlice = createSlice({
@@ -15,11 +16,12 @@ export const userSlice = createSlice({
   reducers: {
     setUserInfo: (state, { payload }: PayloadAction<UserState>): void => {
       const aux = state
-      aux.firstName = payload.firstName
-      aux.lastName = payload.lastName
-      aux.position = payload.position
-      aux.avatar = payload.avatar
-      aux.skills = payload.skills
+      if (payload.firstName) aux.firstName = payload.firstName
+      if (payload.lastName) aux.lastName = payload.lastName
+      if (payload.position) aux.position = payload.position
+      if (payload.avatar) aux.avatar = payload.avatar
+      if (payload.skills) aux.skills = payload.skills
+      if (payload.email) aux.email = payload.email
     }
   }
 })

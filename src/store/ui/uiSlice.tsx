@@ -28,6 +28,7 @@ export const uiSlice = createSlice({
         title: string | null
         description: string | null
         error: boolean | null
+        onClose?: () => void
       }>
     ): void => {
       const aux = state

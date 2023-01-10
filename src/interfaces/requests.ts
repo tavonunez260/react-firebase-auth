@@ -17,11 +17,6 @@ export interface NameResponse {
   name: string
 }
 
-export interface UserInfoResponse {
-  firstName: string
-  lastName: string
-}
-
 export interface RegisterSuccessResponse {
   kind: string
   idToken: string
@@ -42,8 +37,7 @@ export interface SignInSuccessResponse {
   expiresIn: string
 }
 
-export interface ChangePasswordResponse {
-  kind: string
+export interface changeDataResponse {
   localId: string
   email: string
   idToken: string
@@ -100,4 +94,27 @@ export interface ProviderUserInfo {
   federatedId: string
   email: string
   rawId: string
+}
+
+export interface UserInfo {
+  firstName: string
+  lastName: string
+  position: string
+  skills: Skills[]
+}
+
+export interface ProviderUserInfo {
+  providerId: string
+  federatedId: string
+  email: string
+  rawId: string
+}
+
+export interface AuthInfoResponse {
+  kind: string
+  localId: string
+  email: string
+  providerUserInfo: ProviderUserInfo[]
+  passwordHash: string
+  emailVerified: boolean
 }

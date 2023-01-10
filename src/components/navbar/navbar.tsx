@@ -8,6 +8,7 @@ export const MainNav = (): JSX.Element => {
   const dispatch = useDispatch()
   const { auth } = useSelector((state: RootState) => state.auth)
   const { firstName } = useSelector((state: RootState) => state.user)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

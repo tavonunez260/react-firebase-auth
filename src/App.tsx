@@ -16,17 +16,25 @@ export const App = (): JSX.Element => {
   const dispatch = useDispatch()
   return (
     <>
-      {isLoading && <Loader />}
+      <Loader show={isLoading} />
       <PopUpModal
         open={modal.open}
-        handleClose={() =>
-          dispatch(
-            uiSlice.actions.showModal({ open: false, title: null, description: null, error: null })
-          )
+        handleClose={
+          modal.onClose
+            ? modal.onClose
+            : () =>
+                dispatch(
+                  uiSlice.actions.showModal({
+                    open: false,
+                    title: null,
+                    description: null,
+                    error: null
+                  })
+                )
         }
       />
       <MainNav />
-      <div className="w-full h-[calc(100vh-_10rem)] flex justify-center items-center">
+      <div className="w-full h-[calc(100vh-_4rem)] flex justify-center items-start">
         <Routes>
           <Route
             path="/*"

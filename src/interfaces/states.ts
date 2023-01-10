@@ -2,9 +2,9 @@ import { Skills } from './components'
 
 export interface AuthState {
   auth: boolean
-  token?: string | undefined
-  localId?: string | undefined
-  name?: string | undefined
+  token?: string
+  localId?: string
+  name?: string
 }
 
 export interface UIState {
@@ -14,13 +14,15 @@ export interface UIState {
     title: string | null
     description: string | null
     error: boolean | null
+    onClose?: () => void
   }
 }
 
 export interface UserState {
-  firstName: string | undefined
-  lastName: string | undefined
-  position: string | undefined
-  avatar: string | undefined
-  skills: Skills[] | undefined
+  firstName?: string
+  lastName?: string
+  position?: string
+  email?: string
+  avatar?: string
+  skills?: Skills[]
 }
